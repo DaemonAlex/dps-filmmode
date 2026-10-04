@@ -36,7 +36,7 @@ One key hides every HUD layer and gives you an eased free camera, for clean reco
    - Players must be members of those groups through your normal ace principals, for example `add_principal identifier.license:xxxx group.admin`.
    - To give one more group access, add its name to `Config.AceGroups`, or add `add_ace group.<name> dps.film allow` yourself.
 4. Restart the server, or run `ensure dps-filmmode`.
-5. In game, press `Home` or type `/film`.
+5. In game, type `/film`. To use a key, bind "Film mode" under Settings > Key Bindings > FiveM.
 
 ## Configuration
 
@@ -48,7 +48,7 @@ All options are in `config.lua`.
 | `Config.AutoAces` | `true` | Adds the ace to every group in `Config.AceGroups` at resource start. |
 | `Config.AceGroups` | `{ 'admin', 'god' }` | Groups that receive the ace when `AutoAces` is on. |
 | `Config.Command` | `'film'` | Chat command that toggles film mode. |
-| `Config.Key` | `'HOME'` | Default key. Pick one no other script uses (many admin menus use F9). Players can rebind it under Settings > Key Bindings > FiveM. |
+| `Config.Key` | `''` | Default key. Empty means no key: players bind it themselves under Settings > Key Bindings > FiveM. If you set one, pick a key no other script uses (many admin menus use F9). |
 | `Config.Hide.radar` | `true` | Hides the minimap and every base-game HUD element, every frame while on. |
 | `Config.Hide.hudCommand` | `'togglehud'` | Command run to toggle your HUD on start and again on stop. Use `''` to skip. |
 | `Config.Hide.chat` | `true` | Blocks the chat key, clears the chat box, and re-enables chat on stop. |
@@ -71,7 +71,7 @@ All other game controls are disabled while film mode is on.
 
 | Input | Action |
 |---|---|
-| `Home` (default) or `/film` | Start or stop film mode |
+| `/film` (or your own key) | Start or stop film mode |
 | `Esc` | Stop film mode |
 | `W` / `S` | Move forward / back (level) |
 | `A` / `D` | Move left / right |
