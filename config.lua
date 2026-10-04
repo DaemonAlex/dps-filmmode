@@ -9,7 +9,7 @@ Config.AceGroups = { 'admin', 'god' }
 
 -- Key and command. The key is a default; players rebind it under Settings > Key Bindings > FiveM.
 Config.Command = 'film'
-Config.Key = 'F9'
+Config.Key = 'HOME' -- was F9, which wasabi_adminmenu also uses (Config.OpenKey); 10-04
 
 -- What gets hidden while filming.
 Config.Hide = {

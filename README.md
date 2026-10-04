@@ -36,7 +36,7 @@ One key hides every HUD layer and gives you an eased free camera, for clean reco
    - Players must be members of those groups through your normal ace principals, for example `add_principal identifier.license:xxxx group.admin`.
    - To give one more group access, add its name to `Config.AceGroups`, or add `add_ace group.<name> dps.film allow` yourself.
 4. Restart the server, or run `ensure dps-filmmode`.
-5. In game, press `F9` or type `/film`.
+5. In game, press `Home` or type `/film`.
 
 ## Configuration
 
@@ -48,7 +48,7 @@ All options are in `config.lua`.
 | `Config.AutoAces` | `true` | Adds the ace to every group in `Config.AceGroups` at resource start. |
 | `Config.AceGroups` | `{ 'admin', 'god' }` | Groups that receive the ace when `AutoAces` is on. |
 | `Config.Command` | `'film'` | Chat command that toggles film mode. |
-| `Config.Key` | `'F9'` | Default key. Players can rebind it under Settings > Key Bindings > FiveM. |
+| `Config.Key` | `'HOME'` | Default key. Pick one no other script uses (many admin menus use F9). Players can rebind it under Settings > Key Bindings > FiveM. |
 | `Config.Hide.radar` | `true` | Hides the minimap and every base-game HUD element, every frame while on. |
 | `Config.Hide.hudCommand` | `'togglehud'` | Command run to toggle your HUD on start and again on stop. Use `''` to skip. |
 | `Config.Hide.chat` | `true` | Blocks the chat key, clears the chat box, and re-enables chat on stop. |
@@ -71,7 +71,7 @@ All other game controls are disabled while film mode is on.
 
 | Input | Action |
 |---|---|
-| `F9` (default) or `/film` | Start or stop film mode |
+| `Home` (default) or `/film` | Start or stop film mode |
 | `Esc` | Stop film mode |
 | `W` / `S` | Move forward / back (level) |
 | `A` / `D` | Move left / right |
@@ -88,7 +88,7 @@ All other game controls are disabled while film mode is on.
 | Problem | Fix |
 |---|---|
 | "You are not allowed to use film mode." | The player lacks the ace. Check `Config.Ace`, that the player is in a group listed in `Config.AceGroups`, and that `Config.AutoAces` is on or you added the ace yourself. |
-| Nothing happens on F9. | Check that the resource is started. The key may be rebound under Settings > Key Bindings > FiveM. Try `/film`. |
+| Film mode turns on with another menu, or nothing happens on the key. | Another script shares the key: change `Config.Key`, and rebind it under Settings > Key Bindings > FiveM. Check that the resource is started. The key may be rebound under Settings > Key Bindings > FiveM. Try `/film`. |
 | "Could not create the camera." | The camera failed to create. Try again. If it repeats, check the client console for errors. |
 | The HUD stays visible. | Your HUD has its own toggle. Set `Config.Hide.hudCommand` to that command. |
 | The HUD toggles the wrong way after stopping. | The HUD command is a toggle. If your HUD was already hidden before film mode, the command shows it. Set `Config.Hide.hudCommand = ''` in that case. |
