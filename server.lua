@@ -8,5 +8,6 @@ if Config.AutoAces then
 end
 
 lib.callback.register('dps-filmmode:server:allowed', function(source)
-    return IsPlayerAceAllowed(source, Config.Ace) == true
+    local ok = IsPlayerAceAllowed(source, Config.Ace)
+    return ok == true or ok == 1   -- the native can answer 1 instead of true; Studio accepted both, film mode only took true
 end)

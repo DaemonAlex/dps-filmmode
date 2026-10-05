@@ -87,9 +87,11 @@ local function loop()
     local sens = c.sensitivity or 5.0
     local pitchLimit = c.pitchLimit or 89.0
     local fov = c.fov or 50.0
+    local lookSmoothing = c.lookSmoothing or 0.15
     local vel = vector3(0.0, 0.0, 0.0)
     local pos = GetCamCoord(cam)
     local rot = GetCamRot(cam, 2)
+    local aim = rot                 -- where the mouse wants the camera to point; rot eases toward it
     local last = GetGameTimer()
 
     while on and cam and DoesCamExist(cam) do
@@ -107,12 +109,15 @@ local function loop()
         -- look
         local lx = GetDisabledControlNormal(0, 1)
         local ly = GetDisabledControlNormal(0, 2)
-        local pitch = rot.x - ly * sens
+        local pitch = aim.x - ly * sens
         if pitch > pitchLimit then pitch = pitchLimit elseif pitch < -pitchLimit then pitch = -pitchLimit end
-        rot = vector3(pitch, 0.0, rot.z - lx * sens)
+        aim = vector3(pitch, 0.0, aim.z - lx * sens)
+        -- ease toward the aim, the same at any frame rate
+        local lk = 1.0 - (1.0 - lookSmoothing) ^ (dt * 60.0)
+        rot = rot + (aim - rot) * lk
 
-        -- move
-        local fwd = dirFrom(rot)
+        -- move: level flight. W A S D stay flat whatever the pitch; only Q E change height.
+        local fwd = dirFrom(vector3(0.0, 0.0, rot.z))
         local right = rightFrom(rot)
         local up = vector3(0.0, 0.0, 1.0)
         local want = vector3(0.0, 0.0, 0.0)
@@ -126,7 +131,7 @@ local function loop()
         if IsDisabledControlPressed(0, 21) then mult = c.fast or 4.0 end
         if IsDisabledControlPressed(0, 36) then mult = c.slow or 0.25 end
         local target = want * (speed * mult)
-        vel = vel + (target - vel) * smoothing
+        vel = vel + (target - vel) * (1.0 - (1.0 - smoothing) ^ (dt * 60.0))
         pos = pos + vel * dt
 
         -- zoom
