@@ -2,6 +2,12 @@
 
 One key hides every HUD layer and gives you an eased free camera, for clean recording on a Qbox FiveM server.
 
+## What it is for
+
+Staff who record trailers and clips need a clean screen and a camera that moves smoothly. Turning
+off the minimap, the HUD and the chat one by one is slow, and it is easy to forget one. Film mode
+does all of it with one command and puts it all back when you stop.
+
 ## Features
 
 - Hides the minimap and every base-game HUD element for as long as film mode is on.
@@ -16,6 +22,24 @@ One key hides every HUD layer and gives you an eased free camera, for clean reco
 - Access is controlled by an ace permission, checked on the server.
 - The only thread (the camera loop) runs while film mode is on.
 - Film mode stops by itself when the resource stops or the player logs out.
+
+## On its own, and with other scripts
+
+**On its own.** With `ox_lib` you get the free camera, a hidden minimap and base-game HUD, and
+the ace check. On a server with no extra HUD that is a clean screen.
+
+**With Qbox (qbx_core).** Film mode stops by itself when the player logs out to character
+select. The script only listens for the logout event.
+
+**With a paid HUD (jg-hud).** A custom HUD draws on top of the game, so hiding the base-game HUD
+does not hide it. Film mode runs the HUD's own `togglehud` command when you start and again when
+you stop. It only runs that one command, so a HUD update does not break it unless the command
+name changes. For another HUD, set `Config.Hide.hudCommand` to its toggle command.
+
+**With a chat resource ([dps-chat](https://github.com/DaemonAlex/dps-chat) or the default
+chat).** Film mode blocks the chat key and sends `chat:clear`, so no box or message shows in the
+shot. With dps-chat there is no feed to clear. The dps-chat command box has its own key binding
+and still opens during film mode, so do not press that key while you record.
 
 ## Prerequisites
 
@@ -101,3 +125,45 @@ All other game controls are disabled while film mode is on.
 ## License
 
 MIT.
+
+## Recent changes
+
+- **12 November 2026.** README: what it is for, how it works alone and with paid scripts, other
+  DPS scripts.
+- **4 October 2026.** No default key. Use `/film`, or bind "Film mode" yourself. F9 clashed with
+  the admin menu, and Home was tried as the default first.
+- **4 October 2026.** Level flight, a smoother camera at walking pace (speed 2.0, was 6.0), and a
+  fix for the admin check.
+- **28 September 2026.** Version 1.0.0: the HUD kill switch and the free camera.
+
+## Author
+
+Made by [DaemonAlex](https://github.com/DaemonAlex) for DelPerroSands.
+
+## Other DPS scripts
+
+All of these are made for DelPerroSands and run together on one Qbox server. Each one works on
+its own. The ones marked "pairs with" do more when both are running.
+
+| Script | What it does |
+|---|---|
+| [dps-inventory](https://github.com/DaemonAlex/dps-inventory) | The inventory: ox_inventory with equipment slots, backpacks, armour plates and a self status panel, in the DelPerroSands colours. |
+| [dps-medical](https://github.com/DaemonAlex/dps-medical) | Patient records, illness and diagnostic tests. A companion to wasabi_ambulance. Pairs with dps-inventory: symptoms and diagnoses show on the status panel. |
+| [dps-insurance](https://github.com/DaemonAlex/dps-insurance) | Ties m-Insurance into the MDT, impound, hospital and medical chart. Pairs with dps-medical. |
+| [dps-studio](https://github.com/DaemonAlex/dps-studio) | Build rooms, doors and portals in game from one panel (`/studio`), with owners and managers so staff do not have to support them. |
+| [dps-shops](https://github.com/DaemonAlex/dps-shops) | Shop clerks who greet and react to a robbery, then player-owned shops. |
+| [dps-fleet](https://github.com/DaemonAlex/dps-fleet) | Vehicle browser and workshop on one panel: extras, liveries and mods for emergency vehicles. |
+| [dps-parking](https://github.com/DaemonAlex/dps-parking) | Parking with valet, impound, violations and reserved spots. |
+| [dps-vehiclepersistence](https://github.com/DaemonAlex/dps-vehiclepersistence) | Vehicles stay where they were parked. Pairs with dps-parking. |
+| [dps-towjob](https://github.com/DaemonAlex/dps-towjob) | Queue-based tow job with jg-mechanic integration. |
+| [dps-services](https://github.com/DaemonAlex/dps-services) | Request a tow and follow it live on the lb-phone and lb-tablet. Pairs with dps-towjob. |
+| [dps-autoshops](https://github.com/DaemonAlex/dps-autoshops) | Self-service repair shops when no mechanic is on duty. |
+| [dps-cityworker](https://github.com/DaemonAlex/dps-cityworker) | City infrastructure job and career. |
+| [dps-ainpcs](https://github.com/DaemonAlex/dps-ainpcs) | NPCs you can talk to, with trust, quests and intel. |
+| [dps-badpeds](https://github.com/DaemonAlex/dps-badpeds) | Police interaction with NPCs: stops, arrests, intel and jail records. |
+| [dps-gangwars](https://github.com/DaemonAlex/dps-gangwars) | Ambient gang NPCs, territory population and war reinforcements. |
+| [dps-rotations](https://github.com/DaemonAlex/dps-rotations) | Moves dealers, harvests and other spots on a fixed schedule. |
+| [dps-trains](https://github.com/DaemonAlex/dps-trains) | The train system. Pairs with dps-trains-stock, dps-traintools and dps-transitapp. |
+| [dps-transitapp](https://github.com/DaemonAlex/dps-transitapp) | Live train arrival boards on the lb-phone. |
+| [dps-faceplant](https://github.com/DaemonAlex/dps-faceplant) | City help, reports and staff tools on the lb-phone and lb-tablet. |
+| [dps-chat](https://github.com/DaemonAlex/dps-chat) | A command box for voice-only servers. No chat feed. |
